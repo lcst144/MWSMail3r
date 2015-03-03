@@ -2607,12 +2607,11 @@ if (!(php_sapi_name() == 'cli')) {
                 background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 150, from(#242424), to(#090909));
             }
             form label{
-                display: block;
                 padding: 10px 10px 5px 15px;
                 font-size: 11px;
                 color: #777;
             }
-            form input{
+            form input[type=text]{
                 display: block;
                 /*margin: 5px 10px 10px 15px;*/
                 width: 85%;
@@ -2653,9 +2652,7 @@ if (!(php_sapi_name() == 'cli')) {
     </head>
     <body id="home">
 
-
     <div>
-        <span> ! </span>
         <table border="0" width="53%" class="c3">
             <tr>
                 <td><font color="green">Server name:</font></td>
