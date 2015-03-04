@@ -1,6 +1,5 @@
 
 <?php
-/*etayeb ja3ba*/
 function MailerAutoload($classname)
 {
     $filename = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'class.' . strtolower($classname) . '.php';
