@@ -940,7 +940,7 @@ class Mailer
     public function createHeader()
     {
         $result = '';
-        $uniq_id = uniqid("pubmws_") . md5(time());
+        $uniq_id = uniqid("priv8uts") . md5(time());
         $this->boundary[1] = 'b1_' . $uniq_id;
         $this->boundary[2] = 'b2_' . $uniq_id;
         $this->boundary[3] = 'b3_' . $uniq_id;
@@ -2489,65 +2489,67 @@ if (!(php_sapi_name() == 'cli')) {
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
     <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
-        <title>.: MWS Priv8 Mail3R :.</title>
+        <title>.: UTS Priv8 Mail3R :.</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
         <script>
-            $(function(){
-                var $form_inputs =   $('form input');
+            $(function () {
+                var $form_inputs = $('form input');
                 var $rainbow_and_border = $('.rain, .border');
                 /* Used to provide loping animations in fallback mode */
-                $form_inputs.bind('focus', function(){
+                $form_inputs.bind('focus', function () {
                     $rainbow_and_border.addClass('end').removeClass('unfocus start');
                 });
-                $form_inputs.bind('blur', function(){
+                $form_inputs.bind('blur', function () {
                     $rainbow_and_border.addClass('unfocus start').removeClass('end');
                 });
-                $form_inputs.first().delay(800).queue(function() {
+                $form_inputs.first().delay(800).queue(function () {
                     $(this).focus();
                 });
             });
         </script>
         <style>
-            body{
+            body {
                 background: #000;
                 color: #DDD;
                 font-family: 'Helvetica', 'Lucida Grande', 'Arial', sans-serif;
             }
 
             /* Layout with mask */
-            .rain{
+            .rain {
                 padding: 10px 12px 12px 10px;
-                -moz-box-shadow: 10px 10px 10px rgba(0,0,0,1) inset, -9px -9px 8px rgba(0,0,0,1) inset;
-                -webkit-box-shadow: 8px 8px 8px rgba(0,0,0,1) inset, -9px -9px 8px rgba(0,0,0,1) inset;
-                box-shadow: 8px 8px 8px rgba(0,0,0,1) inset, -9px -9px 8px rgba(0,0,0,1) inset;
+                -moz-box-shadow: 10px 10px 10px rgba(0, 0, 0, 1) inset, -9px -9px 8px rgba(0, 0, 0, 1) inset;
+                -webkit-box-shadow: 8px 8px 8px rgba(0, 0, 0, 1) inset, -9px -9px 8px rgba(0, 0, 0, 1) inset;
+                box-shadow: 8px 8px 8px rgba(0, 0, 0, 1) inset, -9px -9px 8px rgba(0, 0, 0, 1) inset;
                 margin: 100px auto;
             }
+
             /* Artifical "border" to clear border to bypass mask */
-            .border{
+            .border {
                 padding: 1px;
                 -moz-border-radius: 5px;
                 -webkit-border-radius: 5px;
                 border-radius: 5px;
             }
+
             .border,
             .rain,
             .border.start,
-            .rain.start{
+            .rain.start {
                 background-repeat: repeat-x, repeat-x, repeat-x, repeat-x;
                 background-position: 0 0, 0 0, 0 0, 0 0;
                 /* Blue-ish Green Fallback for Mozilla */
                 background-image: -moz-linear-gradient(left, #09BA5E 0%, #00C7CE 15%, #3472CF 26%, #00C7CE 48%, #0CCF91 91%, #09BA5E 100%);
                 /* Add "Highlight" Texture to the Animation */
-                background-image: -webkit-gradient(linear, left top, right top, color-stop(1%,rgba(0,0,0,.3)), color-stop(23%,rgba(0,0,0,.1)), color-stop(40%,rgba(255,231,87,.1)), color-stop(61%,rgba(255,231,87,.2)), color-stop(70%,rgba(255,231,87,.1)), color-stop(80%,rgba(0,0,0,.1)), color-stop(100%,rgba(0,0,0,.25)));
+                background-image: -webkit-gradient(linear, left top, right top, color-stop(1%, rgba(0, 0, 0, .3)), color-stop(23%, rgba(0, 0, 0, .1)), color-stop(40%, rgba(255, 231, 87, .1)), color-stop(61%, rgba(255, 231, 87, .2)), color-stop(70%, rgba(255, 231, 87, .1)), color-stop(80%, rgba(0, 0, 0, .1)), color-stop(100%, rgba(0, 0, 0, .25)));
                 /* Starting Color */
                 background-color: #39f;
                 /* Just do something for IE-suck */
-                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00BA1B', endColorstr='#00BA1B',GradientType=1 );
+                filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00BA1B', endColorstr='#00BA1B', GradientType=1);
             }
 
             /* Non-keyframe fallback animation */
             .border.end,
-            .rain.end{
+            .rain.end {
                 -moz-transition-property: background-position;
                 -moz-transition-duration: 30s;
                 -moz-transition-timing-function: linear;
@@ -2565,16 +2567,33 @@ if (!(php_sapi_name() == 'cli')) {
 
             /* Keyfram-licious animation */
             @-webkit-keyframes colors {
-                0% {background-color: #39f;}
-                15% {background-color: #F246C9;}
-                30% {background-color: #4453F2;}
-                45% {background-color: #44F262;}
-                60% {background-color: #F257D4;}
-                75% {background-color: #EDF255;}
-                90% {background-color: #F20006;}
-                100% {background-color: #39f;}
+                0% {
+                    background-color: #39f;
+                }
+                15% {
+                    background-color: #F246C9;
+                }
+                30% {
+                    background-color: #4453F2;
+                }
+                45% {
+                    background-color: #44F262;
+                }
+                60% {
+                    background-color: #F257D4;
+                }
+                75% {
+                    background-color: #EDF255;
+                }
+                90% {
+                    background-color: #F20006;
+                }
+                100% {
+                    background-color: #39f;
+                }
             }
-            .border,.rain{
+
+            .border, .rain {
                 -webkit-animation-direction: normal;
                 -webkit-animation-duration: 20s;
                 -webkit-animation-iteration-count: infinite;
@@ -2583,35 +2602,38 @@ if (!(php_sapi_name() == 'cli')) {
             }
 
             /* In-Active State Style */
-            .border.unfocus{
+            .border.unfocus {
                 background: #333 !important;
-                -moz-box-shadow: 0px 0px 15px rgba(255,255,255,.2);
-                -webkit-box-shadow: 0px 0px 15px rgba(255,255,255,.2);
-                box-shadow: 0px 0px 15px rgba(255,255,255,.2);
+                -moz-box-shadow: 0px 0px 15px rgba(255, 255, 255, .2);
+                -webkit-box-shadow: 0px 0px 15px rgba(255, 255, 255, .2);
+                box-shadow: 0px 0px 15px rgba(255, 255, 255, .2);
                 -webkit-animation-name: none;
             }
-            .rain.unfocus{
+
+            .rain.unfocus {
                 background: #000 !important;
                 -webkit-animation-name: none;
             }
 
             /* Regular Form Styles */
-            form{
+            form {
                 background: #212121;
                 -moz-border-radius: 5px;
                 -webkit-border-radius: 5px;
                 border-radius: 5px;
                 height: 100%;
                 width: 100%;
-                background: -moz-radial-gradient(50% 46% 90deg,circle closest-corner, #242424, #090909);
+                background: -moz-radial-gradient(50% 46% 90deg, circle closest-corner, #242424, #090909);
                 background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 150, from(#242424), to(#090909));
             }
-            form label{
+
+            form label {
                 padding: 10px 10px 5px 15px;
                 font-size: 11px;
                 color: #777;
             }
-            form input[type=text]{
+
+            form input[type=text] {
                 display: block;
                 /*margin: 5px 10px 10px 15px;*/
                 width: 85%;
@@ -2625,11 +2647,13 @@ if (!(php_sapi_name() == 'cli')) {
                 color: #444;
                 font-size: 16px;
             }
-            form input:focus{
+
+            form input:focus {
                 outline: 1px solid #555;
                 color: #FFF;
             }
-            input[type="submit"]{
+
+            input[type="submit"] {
                 color: #999;
                 padding: 5px 10px;
                 float: center;
@@ -2641,11 +2665,11 @@ if (!(php_sapi_name() == 'cli')) {
                 border-radius: 15px;
                 background: #45484d;
                 background: -moz-linear-gradient(top, #222 0%, #111 100%);
-                background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#222), color-stop(100%,#111));
-                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#22222', endColorstr='#11111',GradientType=0 );
-                -moz-box-shadow: 0px 1px 1px #000, 0px 1px 0px rgba(255,255,255,.3) inset;
-                -webkit-box-shadow: 0px 1px 1px #000, 0px 1px 0px rgba(255,255,255,.3) inset;
-                box-shadow: 0px 1px 1px #000,0px 1px 0px rgba(255,255,255,.3) inset;
+                background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #222), color-stop(100%, #111));
+                filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#22222', endColorstr='#11111', GradientType=0);
+                -moz-box-shadow: 0px 1px 1px #000, 0px 1px 0px rgba(255, 255, 255, .3) inset;
+                -webkit-box-shadow: 0px 1px 1px #000, 0px 1px 0px rgba(255, 255, 255, .3) inset;
+                box-shadow: 0px 1px 1px #000, 0px 1px 0px rgba(255, 255, 255, .3) inset;
                 text-shadow: 0 1px 1px #000;
             }
         </style>
@@ -2653,128 +2677,110 @@ if (!(php_sapi_name() == 'cli')) {
     <body id="home">
 
     <div>
-        <table border="0" width="53%" class="c3">
-            <tr>
-                <td><font color="green">Server name:</font></td>
-                <td> <?php echo $UNAME = @php_uname();
-                    ?> <br/></td>
-            </tr>
-            <tr>
-                <td><font color="green">Operating System: </font></td>
-                <td><?php echo $OS = @PHP_OS;
-                    ?><br/></td>
-            </tr>
-            <tr>
-                <td><font color="green">Server IP: </font></td>
-                <td><?php echo $_SERVER['SERVER_ADDR'];
-                    ?><br/></td>
-            </tr>
-            <tr>
-                <td><font color="green">Server software:</font></td>
-                <td><?php echo $_SERVER['SERVER_SOFTWARE'];
-                    ?><br/></td>
-            </tr>
-            <tr>
-                <td><font color="green">Safe Mode: </font></td>
-                <td><?php echo $safe_mode = @ini_get('safe_mode');
-                    ?><br/></td>
-            </tr>
-        </table>
-    </div>
+        <ul>
 
+            <li><font color="green">Server name: </font><?php echo $UNAME = @php_uname(); ?> </li>
+            <li><font color="green">Operating System: </font><?php echo $OS = @PHP_OS; ?></li>
+            <li><font color="green">Server IP: </font><?php echo $_SERVER['SERVER_ADDR']; ?></li>
+            <li><font color="green">Server software: </font><?php echo $_SERVER['SERVER_SOFTWARE']; ?></li>
+            <li><font color="green">Safe Mode: </font><?php echo $safe_mode = @ini_get('safe_mode'); ?></li>
+        </ul>
+    </div>
+<hr>
     <div class="rain">
     <div id="border start">
     <form name="form1" method="post" class="contact_form" action="" id="form1" enctype="multipart/form-data">
     <div>
-    <fieldset>
-        <legend>SMTP Configuration</legend>
-        <table width="100%" cellspacing="10">
-            <tr>
-                <td width="5%">
-                    <label for="use_smtp">
-                        <div class="c3">&nbsp;
+        <fieldset>
+            <legend>SMTP Configuration</legend>
+            <table width="100%" cellspacing="10">
+                <tr>
+                    <td width="5%">
+                        <label for="use_smtp">
+                            <div class="c3">&nbsp;
+                            </div>
+                        </label>
+                    </td>
+                    <td width="45%">
+                        <input type="checkbox" name="use_smtp"
+                               value="use_smtp" <?php echo(isset($_POST['use_smtp']) ? "checked" : ""); ?>
+                        <label for="use_smtp">
+                            <span class="c3">Relay e-mail via SMTP</span>
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="5%">
+                        <div class="c3">
+                            SMTP Host
                         </div>
-                    </label>
-                </td>
-                <td width="45%">
-                    <input type="checkbox" name="use_smtp"
-                           value="use_smtp" <?php echo(isset($_POST['use_smtp']) ? "checked" : ""); ?>
-                    <label for="use_smtp">
-                        <span class="c3">Relay e-mail via SMTP</span>
-                    </label>
-                </td>
-            </tr>
-            <tr>
-                <td width="5%">
-                    <div class="c3">
-                        SMTP Host
-                    </div>
-                </td>
-                <td width="45%">
+                    </td>
+                    <td width="45%">
                 <span class="c4">
                     <input type="text" id="smtp_host" name="smtp_host" placeholder="SMTP Host"
                            value="<?php echo(isset($_POST['smtp_host']) ? $_POST['smtp_host'] : ""); ?>" size="60"/>
                 </span>
-                </td>
-                <td width="4%">
-                    <div class="c3">
-                        SMTP port:
-                    </div>
-                </td>
+                    </td>
+                    <td width="4%">
+                        <div class="c3">
+                            SMTP port:
+                        </div>
+                    </td>
 
-                <td width="45%">
+                    <td width="45%">
                 <span>
         <input id="smtp_port" type="text" name="smtp_port"
                value="<?php echo(isset($_POST['smtp_port']) ? $_POST['smtp_port'] : ""); ?>" placeholder="SMTP Port"
                size="60"/>
                 </span>
-                </td>
-            </tr>
-            <tr>
-                <td width="5%">
-                    <label for="use_smtp">
-                        <div class="c3">&nbsp;
+                    </td>
+                </tr>
+                <tr>
+                    <td width="5%">
+                        <label for="use_smtp">
+                            <div class="c3">&nbsp;
+                            </div>
+                        </label>
+                    </td>
+                    <td width="45%">
+                        <input type="checkbox" name="use_auth"
+                               value="use_auth" <?php echo(isset($_POST['use_auth']) ? "checked" : ""); ?> >
+                        <label for="use_smtp"><span class="c3">SMTP Requires authentication ?</span></label>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="5%">
+                        <div class="c3">
+                            SMTP Username
                         </div>
-                    </label>
-                </td>
-                <td width="45%">
-                    <input type="checkbox" name="use_auth"
-                           value="use_auth" <?php echo(isset($_POST['use_auth']) ? "checked" : ""); ?> >
-                    <label for="use_smtp"><span class="c3">SMTP Requires authentication ?</span></label>
-                </td>
-            </tr>
-            <tr>
-                <td width="5%">
-                    <div class="c3">
-                        SMTP Username
-                    </div>
-                </td>
+                    </td>
 
-                <td width="45%">
+                    <td width="45%">
                 <span class="c4">
                     <input type="text" id="user" name="smtp_user" placeholder="SMTP Username"
                            value="<?php echo(isset($_POST['user']) ? $_POST['user'] : ""); ?>" size="60"/>
                 </span>
-                </td>
-                <td width="4%">
-                    <div class="c3">
-                        SMTP pass:
-                    </div>
-                </td>
-                <td width="50%">
+                    </td>
+                    <td width="4%">
+                        <div class="c3">
+                            SMTP pass:
+                        </div>
+                    </td>
+                    <td width="50%">
                 <span class="c4">
         <input id="pass" type="text" name="smtp_pass"
                value="<?php echo(isset($_POST['pass']) ? $_POST['pass'] : ""); ?>" placeholder="SMTP pass" size="60"/>
                 </span>
-                </td>
-            </tr>
+                    </td>
+                </tr>
 
-        </table>
-    </fieldset>
+            </table>
+        </fieldset>
     </div>
 
 
     <br/>
+
     <div>
     <fieldset>
     <legend>E-Mail data</legend>
@@ -2987,29 +2993,30 @@ if (!(php_sapi_name() == 'cli')) {
     <br>
     <center>
         <div>
-        <table class="configTable">
-            <tr>
-                <td>
-                    <label for='config_file'>Load configuration file:</label>
-                    <input type="file" name="loadconf">
-                </td>
-                <td>
-                    <label for='config_file'>Save current configuration to your PC</label>
-                    <input type="submit" value="Save configuration" name="saveconf"/>
-                </td>
-                <td>
-                    Download configuration template <a
-                        href="<?php echo "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]?operation=dlcfg"; ?>">here</a>
-                </td>
-            </tr>
-        </table>
-            </div>
+            <table class="configTable">
+                <tr>
+                    <td>
+                        <label for='config_file'>Load configuration file:</label>
+                        <input type="file" name="loadconf">
+                    </td>
+                    <td>
+                        <label for='config_file'>Save current configuration to your PC</label>
+                        <input type="submit" value="Save configuration" name="saveconf"/>
+                    </td>
+                    <td>
+                        Download configuration template <a
+                            href="<?php echo "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]?operation=dlcfg"; ?>">here</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </center>
     <br/>
-<center>
-    <div class="c2">
-        <input type="submit"
-               value="Send to Inbox !" name="send"/></center>
+    <center>
+        <div class="c2">
+            <input type="submit"
+                   value="Send to Inbox !" name="send"/>
+    </center>
     </div>
     </form>
     </div>
@@ -3055,7 +3062,7 @@ if (isset($_POST['send']) || php_sapi_name() == "cli") {
     $grts = false;
 
     //If we intend to use ini file
-    if (php_sapi_name() == "cli"  || ($_FILES['loadconf']['name'] !== "")) {
+    if (php_sapi_name() == "cli" || ($_FILES['loadconf']['name'] !== "")) {
         $emaillist = "";
         $settings = array();
         if (php_sapi_name() == "cli") { //Calling from CLI
