@@ -1,4 +1,4 @@
-
+<font color="red">DISCLAIMER: I'M NOT RESPONSIBLE FOR ANY MISUSE OF THIS SCRIPT. IT IS FOR EDUCATIONAL PURPOSES ONLY. NEVER EMAIL PEOPLE WITHOUT THEIR CONSENT. DO NOT USE THIS SCRIPT FOR SPAMMING. </FONT>
 #Description
 This mailer is intended to solve common sending problems. It uses the same concept of sending with other problems such as AMS and SendBlaster. It can relay emails via linux SendMail and SMTP for now. It uses a heavily modified PHPMailer class. Read the below sections to understand the advanced functionality of this script. 
 
@@ -58,4 +58,4 @@ This is basically tampering headers. <br>
  Add verified symbol to the title. : Adds the verified symbol to the title.<br>
  
 <h3>We are UTS. We are spammers. Provoke us, we will l33t you ! </h3>
-<h2>Praise for Souheyel!</h2>
+<h3>Praise for Souheyel!</h3>

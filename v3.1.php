@@ -2634,7 +2634,11 @@ if (!(php_sapi_name() == 'cli')) {
                 color: #777;
             }
 
-            form input[type=text] {
+            form input[type=text], textarea {
+                border-radius: 10px;
+                -moz-border-radius: 10px;
+                -khtml-border-radius: 10px;
+                -webkit-border-radius: 10px;
                 display: block;
                 /*margin: 5px 10px 10px 15px;*/
                 width: 85%;
@@ -2642,11 +2646,12 @@ if (!(php_sapi_name() == 'cli')) {
                 -moz-box-shadow: 0px 0px 4px #000 inset;
                 -webkit-box-shadow: 0px 0px 4px #000 inset;
                 box-shadow: 0px 0px 4px #000 inset;
-                outline: 1px solid #333;
-                border: 1px solid #000;
+                /*outline: 1px solid #333;
+                border: 1px solid #000;*/
                 padding: 5px;
                 color: #444;
                 font-size: 16px;
+
             }
 
             form input:focus {
@@ -2673,10 +2678,15 @@ if (!(php_sapi_name() == 'cli')) {
                 box-shadow: 0px 1px 1px #000, 0px 1px 0px rgba(255, 255, 255, .3) inset;
                 text-shadow: 0 1px 1px #000;
             }
+            .banner{
+                display: block;
+                margin-left: auto;
+                margin-right: auto
+            }
         </style>
     </head>
     <body id="home">
-
+    <img src="http://i.imgur.com/urrmhPu.png?1" class="banner"/>
     <div>
         <ul>
 
@@ -2895,17 +2905,7 @@ if (!(php_sapi_name() == 'cli')) {
         <td width="41%"
             valign="top"><span class="c4">
         <textarea id="message_html" class="validate[required]" name="message_html"
-                  placeholder="This is the HTML part of the message" cols="70" rows="10" required>
-
-            <?php echo(isset($_POST['message_html']) ? $_POST['message_html'] : "This mailer uses advanced algorithms. variables are self explanotory.
-            &name&*
-            &surname&*
-            &to& -- victims email
-            [random_string]
-            [random_int]
-            &date& -- Time and date of send
-            &from& -- The sender email adress
-            * - Only available when \"Use email|name|surname format.\" is enabled");?>
+                  placeholder="This is the HTML part of the message" cols="70" rows="10" required><?php echo(isset($_POST['message_html']) ? $_POST['message_html'] : "This mailer uses advanced randomization. Visit https://github.com/TayebJa3ba/MWSMail3r for instructions.");?>
         </textarea>
         <br/>
         </span></td>
@@ -2937,15 +2937,7 @@ if (!(php_sapi_name() == 'cli')) {
 
                     <textarea id="message_text" class="validate[required]" name="message_text" cols="70"
                               placeholder="This is the text part of the message"
-                              rows="10"> <?php echo(isset($_POST['message_text']) ? $_POST['message_text'] : "This mailer uses advanced algorithms. variables are self explanotory.
-            &name&*
-            &surname&*
-            &to& -- victims email
-            [random_string]
-            [random_int]
-            &date& -- Time and date of send
-            &from& -- The sender email adress
-            * - Only available when \"Use email|name|surname format.\" is enabled");?></textarea>
+                              rows="10"><?php echo(isset($_POST['message_text']) ? $_POST['message_text'] : "This mailer uses advanced randomization. Visit https://github.com/TayebJa3ba/MWSMail3r for instructions.");?></textarea>
         <br/>
        <br/>
         </td>
