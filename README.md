@@ -51,10 +51,11 @@ I use multi-part emails. You can let me generate the text part from the html one
 This field is a bit special, you can personalize your emails if you have their respective names. use the email|name|surname format, place the &name& and &surname& and let us do the rest!
 
 <h4>Bypass attempts</h4>
-This is basically tampering headers. 
- Forge MS Outlook Identity : Forges MSOutlook XSender header
- Make it look as newsletter : Forge newsletter headers (unsubscribe, spam score, etc..)
- Fake OVH headers : Fake OVH headers (Works in almost all mail hosts, well except for major ones: gmail, ymail, hotmail, etc..
- Add verified symbol to the title. : Adds the verified symbol to the title.
+This is basically tampering headers. <br>
+ Forge MS Outlook Identity : Forges MSOutlook XSender header<br>
+ Make it look as newsletter : Forge newsletter headers (unsubscribe, spam score, etc..)<br>
+ Fake OVH headers : Fake OVH headers (Works in almost all mail hosts, well except for major ones: gmail, ymail, hotmail, etc..<br>
+ Add verified symbol to the title. : Adds the verified symbol to the title.<br>
  
-<h2>We are UTS. We are spammers. Provoke us, we will l33t you ! </h2>
+<h3>We are UTS. We are spammers. Provoke us, we will l33t you ! </h3>
+<h2>Praise for Souheyel!</h2>
