@@ -57,5 +57,11 @@ This is basically tampering headers. <br>
  Fake OVH headers : Fake OVH headers (Works in almost all mail hosts, well except for major ones: gmail, ymail, hotmail, etc..<br>
  Add verified symbol to the title. : Adds the verified symbol to the title.<br>
  
+#CLI USE
+This script can be used via CLI Too. use [path/to/your/php]/php mailer.php data.ini maillist.txt
+data.ini is a configuration file generated using the WEB interface or a manual edit of the template.
+All features are enabled in cli mode except for file joining. It's still not implemented for the moment.
+
+
 ###We are UTS. We are spammers. Provoke us, we will l33t you ! 
 ###Praise for Souheyel!
