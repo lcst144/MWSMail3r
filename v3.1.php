@@ -2684,7 +2684,7 @@ if (!(php_sapi_name() == 'cli')) {
                 margin-right: auto
             }
             .progress{
-                width: 70%;
+                width: 85%;
                 border: mediumaquamarine;
                 margin-left: auto;
                 margin-right: auto;

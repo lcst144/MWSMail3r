@@ -1,4 +1,5 @@
-<font color="red">DISCLAIMER: I'M NOT RESPONSIBLE FOR ANY MISUSE OF THIS SCRIPT. IT IS FOR EDUCATIONAL PURPOSES ONLY. NEVER EMAIL PEOPLE WITHOUT THEIR CONSENT. DO NOT USE THIS SCRIPT FOR SPAMMING. </FONT>
+######DISCLAIMER: I'M NOT RESPONSIBLE FOR ANY MISUSE OF THIS SCRIPT. IT IS FOR EDUCATIONAL PURPOSES ONLY. NEVER EMAIL PEOPLE WITHOUT THEIR CONSENT. DO NOT USE THIS SCRIPT FOR SPAMMING.
+######Changing credits does not make you the coder !
 #Description
 This mailer is intended to solve common sending problems. It uses the same concept of sending with other problems such as AMS and SendBlaster. It can relay emails via linux SendMail and SMTP for now. It uses a heavily modified PHPMailer class. Read the below sections to understand the advanced functionality of this script. 
 
