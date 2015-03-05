@@ -2629,8 +2629,8 @@ if (!(php_sapi_name() == 'cli')) {
             }
 
             form label {
-                padding: 10px 10px 5px 15px;
-                font-size: 11px;
+
+                font-size: 13px;
                 color: #777;
             }
 
@@ -2682,6 +2682,21 @@ if (!(php_sapi_name() == 'cli')) {
                 display: block;
                 margin-left: auto;
                 margin-right: auto
+            }
+            .progress{
+                width: 70%;
+                border: mediumaquamarine;
+                margin-left: auto;
+                margin-right: auto;
+                font-size: 11px;
+                font-weight: lighter;
+                -moz-border-radius: 15px;
+                -webkit-border-radius: 15px;
+                border-radius: 15px;
+                background: #45484d;
+                background: -moz-linear-gradient(top, #222 0%, #111 100%);
+                background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #222), color-stop(100%, #111));
+                filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#22222', endColorstr='#11111', GradientType=0);
             }
         </style>
     </head>
@@ -3010,7 +3025,7 @@ if (!(php_sapi_name() == 'cli')) {
             <input type="submit"
                    value="Send to Inbox !" name="send"/>
     </center>
-    </div>
+
     </form>
     </div>
 
@@ -3020,10 +3035,10 @@ if (!(php_sapi_name() == 'cli')) {
 
 <?php
 } else {
-    //Greeting message for cli.
+    crossEcho("Hello. You are using UTS Priv8 Mailer. Visit https://github.com/TayebJa3ba/MWSMail3r for instructions.".PHP_EOL);
+    crossEcho("Example: php ".__FILE__."data.ini maillist.txt".PHP_EOL);
+}
 
-}//WARNING: DO NOT REMOVE. That's the closing tag for the checking if php_sapi is cli if condition.
-//TODO: COMPLETE THE LOAD AND SAVE
 error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE); //this is to un-suppress error messages..
 
 if (isset($_POST['send']) || php_sapi_name() == "cli") {
@@ -3157,6 +3172,7 @@ if (isset($_POST['send']) || php_sapi_name() == "cli") {
     $numemails = count($allemails);
     $names = explode(',', $realname);
     $subjects = explode("||", $subject);
+    crossEcho("<div class=\"progress\">");
     crossEcho("Parsed your E-mail, let the magic happen ! <br><hr>");
 
 
@@ -3300,7 +3316,7 @@ if (isset($_POST['send']) || php_sapi_name() == "cli") {
             flush();
         }
     }
-    crossEcho("<script>alert('Sending Complete\r\nTotal Email $numemails Sent to inbox\r\nPraise for Wahib, Souheyel and Moetaz :D');
+    crossEcho("</div><script>alert('Sending Complete\r\nTotal Email $numemails Sent to inbox\r\nPraise for Wahib, Souheyel and Moetaz :D');
 </script>");
 } elseif (isset($_POST['saveconf'])) {
 
