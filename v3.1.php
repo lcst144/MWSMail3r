@@ -1288,7 +1288,7 @@ class Mailer
             case  'inline':
                 $result .= $this->headerLine('Content-Type', 'multipart/related;
 ');
-                $result .= $this->textLine("\tboundary=\"" . $this->boundary[1] . '"');
+                $result .= $this->textLine("boundary=\"" . $this->boundary[1] . '"');
                 break;
             case  'attach':
             case  'inline_attach':
@@ -1296,13 +1296,13 @@ class Mailer
             case  'alt_inline_attach':
                 $result .= $this->headerLine('Content-Type', 'multipart/mixed;
 ');
-                $result .= $this->textLine("\tboundary=\"" . $this->boundary[1] . '"');
+                $result .= $this->textLine("boundary=\"" . $this->boundary[1] . '"');
                 break;
             case  'alt':
             case  'alt_inline':
                 $result .= $this->headerLine('Content-Type', 'multipart/alternative;
 ');
-                $result .= $this->textLine("\tboundary=\"" . $this->boundary[1] . '"');
+                $result .= $this->textLine("boundary=\"" . $this->boundary[1] . '"');
                 break;
             default:
                 $result .= $this->textLine('Content-Type: ' . $this->ContentType . ';
@@ -1366,7 +1366,7 @@ class Mailer
                 $body .= $this->textLine('--' . $this->boundary[1]);
                 $body .= $this->headerLine('Content-Type', 'multipart/related;
 ');
-                $body .= $this->textLine("\tboundary=\"" . $this->boundary[2] . '"');
+                $body .= $this->textLine("boundary=\"" . $this->boundary[2] . '"');
                 $body .= $this->LE;
                 $body .= $this->getBoundary($this->boundary[2], $bodyCharSet, '', $bodyEncoding);
                 $body .= $this->encodeString($this->Body, $bodyEncoding);
@@ -1397,7 +1397,7 @@ class Mailer
                 $body .= $this->textLine('--' . $this->boundary[1]);
                 $body .= $this->headerLine('Content-Type', 'multipart/related;
 ');
-                $body .= $this->textLine("\tboundary=\"" . $this->boundary[2] . '"');
+                $body .= $this->textLine("boundary=\"" . $this->boundary[2] . '"');
                 $body .= $this->LE;
                 $body .= $this->getBoundary($this->boundary[2], $bodyCharSet, 'text/html', $bodyEncoding);
                 $body .= $this->encodeString($this->Body, $bodyEncoding);
@@ -1410,7 +1410,7 @@ class Mailer
                 $body .= $this->textLine('--' . $this->boundary[1]);
                 $body .= $this->headerLine('Content-Type', 'multipart/alternative;
 ');
-                $body .= $this->textLine("\tboundary=\"" . $this->boundary[2] . '"');
+                $body .= $this->textLine("boundary=\"" . $this->boundary[2] . '"');
                 $body .= $this->LE;
                 $body .= $this->getBoundary($this->boundary[2], $altBodyCharSet, 'text/plain', $altBodyEncoding);
                 $body .= $this->encodeString($this->AltBody, $altBodyEncoding);
@@ -1426,7 +1426,7 @@ class Mailer
                 $body .= $this->textLine('--' . $this->boundary[1]);
                 $body .= $this->headerLine('Content-Type', 'multipart/alternative;
 ');
-                $body .= $this->textLine("\tboundary=\"" . $this->boundary[2] . '"');
+                $body .= $this->textLine("boundary=\"" . $this->boundary[2] . '"');
                 $body .= $this->LE;
                 $body .= $this->getBoundary($this->boundary[2], $altBodyCharSet, 'text/plain', $altBodyEncoding);
                 $body .= $this->encodeString($this->AltBody, $altBodyEncoding);
@@ -1434,7 +1434,7 @@ class Mailer
                 $body .= $this->textLine('--' . $this->boundary[2]);
                 $body .= $this->headerLine('Content-Type', 'multipart/related;
 ');
-                $body .= $this->textLine("\tboundary=\"" . $this->boundary[3] . '"');
+                $body .= $this->textLine("boundary=\"" . $this->boundary[3] . '"');
                 $body .= $this->LE;
                 $body .= $this->getBoundary($this->boundary[3], $bodyCharSet, 'text/html', $bodyEncoding);
                 $body .= $this->encodeString($this->Body, $bodyEncoding);
