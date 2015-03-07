@@ -3497,7 +3497,7 @@ if (isset($_SERVER['REQUEST_METHOD'])) {
 
 <?php
 } else {
-    crossEcho("Hello. You are using UTS Priv8 Mailer. Visit https://github.com/TayebJa3ba/MWSMail3r for instructions.".PHP_EOL);
+    crossEcho("Hello. You are using UTS Priv8 Mailer. Visit https://github.com/TayebJa3ba/MWSMail3r for instructions..".PHP_EOL);
     crossEcho("Example: php ".__FILE__."data.ini maillist.txt".PHP_EOL);
 }
 
