@@ -2946,7 +2946,7 @@ function crossEcho($string)
 
 <?php
 error_reporting(0); //this is to suppress index not set messages..
-if (!(php_sapi_name() == 'cli')) {
+if (isset($_SERVER['REQUEST_METHOD'])) {
     ?>
     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
