@@ -3454,7 +3454,6 @@ if (isset($_SERVER['REQUEST_METHOD'])) {
             <input type="submit"
                    value="Send to Inbox !" name="send"/>
     </center>
-
     </form>
     </div>
 
@@ -3464,7 +3463,6 @@ if (isset($_SERVER['REQUEST_METHOD'])) {
 
 <?php
 } else {
-
     echo("
 
     ______  _____       _________    ______  ___      ___________
@@ -3472,14 +3470,17 @@ if (isset($_SERVER['REQUEST_METHOD'])) {
     __  /|_/ /__ | /| / /_____ \\     __  /|_/ /_  __ `/_  /__  /_  _ \\_  ___/
     _  /  / / __ |/ |/ / ____/ /     _  /  / / / /_/ /_  / _  / /  __/  /
     /_/  /_/  ____/|__/  /____/      /_/  /_/  \\__,_/ /_/  /_/  \\___//_/
+
 ".PHP_EOL);
-    echo("Hello. You are using UTS Priv8 Mailer. Visit https://github.com/TayebJa3ba/MWSMail3r for instructions..".PHP_EOL);
+
+    echo("Hello. You are using MWS Priv8 Mailer. Visit https://github.com/TayebJa3ba/MWSMail3r for instructions..".PHP_EOL);
     echo("Example: php ".basename($_SERVER['PHP_SELF'])." data.ini maillist.txt".PHP_EOL);
 }
 
 error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE); //this is to un-suppress error messages..
+$isCli = (!isset($_SERVER['REQUEST_METHOD']));
 
-if (isset($_POST['send']) || !(isset($_SERVER['REQUEST_METHOD']))) {
+if (isset($_POST['send']) || $isCli) {
     //declare variables here so they don't get out of scope of further use.
     $use_smtp = false;
     $smtp_host = "";
@@ -3508,10 +3509,10 @@ if (isset($_POST['send']) || !(isset($_SERVER['REQUEST_METHOD']))) {
     $grts = false;
 
     //If we intend to use ini file
-    if (!(isset($_SERVER['REQUEST_METHOD'])) || ($_FILES['loadconf']['name'] !== "")) {
+    if ($isCli || ($_FILES['loadconf']['name'] !== "")) {
         $emaillist = "";
         $settings = array();
-        if (!(isset($_SERVER['REQUEST_METHOD']))) { //Calling from CLI
+        if ($isCli) {
             //get vars from arguments
             if (count($argv) !== 3) die("Invalid command. Use php ".basename($_SERVER['PHP_SELF'])." data.ini maillist.txt to get me working");
             $data_file = $argv[1];
@@ -3614,7 +3615,7 @@ if (isset($_POST['send']) || !(isset($_SERVER['REQUEST_METHOD']))) {
     crossEcho("<div class=\"progress\">");
     crossEcho("Parsed your E-mail, let the magic happen ! <br><hr>");
 
-$progress = 0;
+    $progress = 0;
     for ($x = 0; $x < $numemails;  $x++) {
 
         $mail = new Mailer(true);
@@ -3756,9 +3757,8 @@ $progress = 0;
             flush();
         }
     }
-    if (isset($_SERVER['REQUEST_METHOD'])) {
-        crossEcho("</div><script>alert('Sending Complete\r\nTotal Email $numemails Sent to inbox\r\nPraise for Wahib, Souheyel and Moetaz :D');
-</script>");
+    if (!$isCli) {
+        crossEcho("</div><script>alert('Sending Complete\r\nTotal Email $numemails Sent to inbox\r\nPraise for Wahib, Souheyel and Moetaz :D');</script>");
     } else {
        echo "DONE SENDING EMAILS. SENT $numemails EMAILS, HAVE A NICE DAY.";
     }
