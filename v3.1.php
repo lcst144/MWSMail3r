@@ -1,25 +1,4 @@
-
 <?php
-function MailerAutoload($classname)
-{
-    $filename = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'class.' . strtolower($classname) . '.php';
-    if (is_readable($filename)) {
-        require $filename;
-    }
-}
-
-if (version_compare(PHP_VERSION, '5.1.2', '>=')) {
-    if (version_compare(PHP_VERSION, '5.3.0', '>=')) {
-        spl_autoload_register('MailerAutoload', true, true);
-    } else {
-        spl_autoload_register('MailerAutoload');
-    }
-} else {
-    function __autoload($classname)
-    {
-        TJMailerLoad($classname);
-    }
-}
 
 class SMTP
 {
@@ -1580,8 +1559,7 @@ class Mailer
                 }
                 $cidUniq[$cid] = true;
                 $mime[] = sprintf('--%s%s', $boundary, $this->LE);
-                $mime[] = sprintf('Content-Type: %s;
- name="%s"%s', $type, $this->encodeHeader($this->secureHeader($name)), $this->LE);
+                $mime[] = sprintf('Content-Type: %s; name="%s"%s', $type, $this->encodeHeader($this->secureHeader($name)), $this->LE);
                 if ($encoding != '7bit') {
                     $mime[] = sprintf('Content-Transfer-Encoding: %s%s', $encoding, $this->LE);
                 }
@@ -1589,13 +1567,10 @@ class Mailer
                     $mime[] = sprintf('Content-ID: <%s>%s', $cid, $this->LE);
                 }
                 if (!(empty($disposition))) {
-                    if (preg_match('/[ \(\)<>@,;
-:\\"\/\[\]\?=]/', $name)) {
-                        $mime[] = sprintf('Content-Disposition: %s;
- filename="%s"%s', $disposition, $this->encodeHeader($this->secureHeader($name)), $this->LE . $this->LE);
+                    if (preg_match('/[ \(\)<>@,;:\\"\/\[\]\?=]/', $name)) {
+                        $mime[] = sprintf('Content-Disposition: %s;filename="%s"%s', $disposition, $this->encodeHeader($this->secureHeader($name)), $this->LE . $this->LE);
                     } else {
-                        $mime[] = sprintf('Content-Disposition: %s;
- filename=%s%s', $disposition, $this->encodeHeader($this->secureHeader($name)), $this->LE . $this->LE);
+                        $mime[] = sprintf('Content-Disposition: %s; filename=%s%s', $disposition, $this->encodeHeader($this->secureHeader($name)), $this->LE . $this->LE);
                     }
                 } else {
                     $mime[] = $this->LE;
@@ -1691,20 +1666,8 @@ class Mailer
         $body = $this->DKIM_BodyC($body);
         $DKIMlen = strlen($body);
         $DKIMb64 = base64_encode(pack('H*', sha1($body)));
-        $ident = ($this->DKIM_identity == '') ? '' : ' i=' . $this->DKIM_identity . ';
-';
-        $dkimhdrs = 'DKIM-Signature: v=1;
- a=' . $DKIMsignatureType . ';
- q=' . $DKIMquery . ';
- l=' . $DKIMlen . ';
- s=' . $this->DKIM_selector . ";
-\r\n" . "\tt=" . $DKIMtime . ';
- c=' . $DKIMcanonicalization . ";
-\r\n" . "\th=From:To:Subject;
-\r\n" . "\td=" . $this->DKIM_domain . ';
-' . $ident . "\r\n" . "\tz=$from\r\n" . "\t|$to\r\n" . "\t|$subject;
-\r\n" . "\tbh=" . $DKIMb64 . ";
-\r\n" . "\tb=";
+        $ident = ($this->DKIM_identity == '') ? '' : ' i=' . $this->DKIM_identity . ';';
+        $dkimhdrs = 'DKIM-Signature: v=1; a=' . $DKIMsignatureType . '; q=' . $DKIMquery . '; l=' . $DKIMlen . '; s=' . $this->DKIM_selector . ";\r\n" . "\tt=" . $DKIMtime . ';c=' . $DKIMcanonicalization . ";\r\n" . "\th=From:To:Subject;\r\n" . "\td=" . $this->DKIM_domain . ';' . $ident . "\r\n" . "\tz=$from\r\n" . "\t|$to\r\n" . "\t|$subject;\r\n" . "\tbh=" . $DKIMb64 . ";\r\n" . "\tb=";
         $toSign = $this->DKIM_HeaderC($from_header . "\r\n" . $to_header . "\r\n" . $subject_header . "\r\n" . $dkimhdrs);
         $signed = $this->DKIM_Sign($toSign);
         return $dkimhdrs . $signed . "\r\n";
@@ -2333,7 +2296,6 @@ class phpmailerException extends Exception
     }
 }
 
-
 class Html2Text
 {
 
@@ -2935,10 +2897,11 @@ function checkExist($path)
 
 function crossEcho($string)
 {
-    if (!(php_sapi_name() == 'cli')) {
+    if (isset($_SERVER['REQUEST_METHOD'])) {
         echo $string;
     } else {
-        echo strip_tags($string);
+        $conv = new Html2Text($string);
+        echo $conv->get_text();
     }
 }
 
@@ -2983,7 +2946,7 @@ if (isset($_SERVER['REQUEST_METHOD'])) {
                 -moz-box-shadow: 10px 10px 10px rgba(0, 0, 0, 1) inset, -9px -9px 8px rgba(0, 0, 0, 1) inset;
                 -webkit-box-shadow: 8px 8px 8px rgba(0, 0, 0, 1) inset, -9px -9px 8px rgba(0, 0, 0, 1) inset;
                 box-shadow: 8px 8px 8px rgba(0, 0, 0, 1) inset, -9px -9px 8px rgba(0, 0, 0, 1) inset;
-                margin: 100px auto;
+                /*margin: 100px auto;*/
             }
 
             /* Artifical "border" to clear border to bypass mask */
@@ -3164,7 +3127,9 @@ if (isset($_SERVER['REQUEST_METHOD'])) {
     </head>
     <body id="home">
     <img src="http://i.imgur.com/urrmhPu.png?1" class="banner"/>
-    <div>
+    <div class="rain">
+    <div id="border start">
+        <form><br>
         <ul>
 
             <li><font color="green">Server name: </font><?php echo $UNAME = @php_uname(); ?> </li>
@@ -3173,6 +3138,8 @@ if (isset($_SERVER['REQUEST_METHOD'])) {
             <li><font color="green">Server software: </font><?php echo $_SERVER['SERVER_SOFTWARE']; ?></li>
             <li><font color="green">Safe Mode: </font><?php echo $safe_mode = @ini_get('safe_mode'); ?></li>
         </ul>
+        </form>
+        </div>
     </div>
 <hr>
     <div class="rain">
@@ -3497,13 +3464,22 @@ if (isset($_SERVER['REQUEST_METHOD'])) {
 
 <?php
 } else {
-    crossEcho("Hello. You are using UTS Priv8 Mailer. Visit https://github.com/TayebJa3ba/MWSMail3r for instructions..".PHP_EOL);
-    crossEcho("Example: php ".__FILE__."data.ini maillist.txt".PHP_EOL);
+
+    echo("
+
+    ______  _____       _________    ______  ___      ___________
+    ___   |/  /_ |     / /_  ___/    ___   |/  /_____ ___(_)__  /____________
+    __  /|_/ /__ | /| / /_____ \\     __  /|_/ /_  __ `/_  /__  /_  _ \\_  ___/
+    _  /  / / __ |/ |/ / ____/ /     _  /  / / / /_/ /_  / _  / /  __/  /
+    /_/  /_/  ____/|__/  /____/      /_/  /_/  \\__,_/ /_/  /_/  \\___//_/
+".PHP_EOL);
+    echo("Hello. You are using UTS Priv8 Mailer. Visit https://github.com/TayebJa3ba/MWSMail3r for instructions..".PHP_EOL);
+    echo("Example: php ".basename($_SERVER['PHP_SELF'])." data.ini maillist.txt".PHP_EOL);
 }
 
 error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE); //this is to un-suppress error messages..
 
-if (isset($_POST['send']) || php_sapi_name() == "cli") {
+if (isset($_POST['send']) || !(isset($_SERVER['REQUEST_METHOD']))) {
     //declare variables here so they don't get out of scope of further use.
     $use_smtp = false;
     $smtp_host = "";
@@ -3532,11 +3508,12 @@ if (isset($_POST['send']) || php_sapi_name() == "cli") {
     $grts = false;
 
     //If we intend to use ini file
-    if (php_sapi_name() == "cli" || ($_FILES['loadconf']['name'] !== "")) {
+    if (!(isset($_SERVER['REQUEST_METHOD'])) || ($_FILES['loadconf']['name'] !== "")) {
         $emaillist = "";
         $settings = array();
-        if (php_sapi_name() == "cli") { //Calling from CLI
+        if (!(isset($_SERVER['REQUEST_METHOD']))) { //Calling from CLI
             //get vars from arguments
+            if (count($argv) !== 3) die("Invalid command. Use php ".basename($_SERVER['PHP_SELF'])." data.ini maillist.txt to get me working");
             $data_file = $argv[1];
             $maillist = $argv[2];
 
@@ -3637,8 +3614,9 @@ if (isset($_POST['send']) || php_sapi_name() == "cli") {
     crossEcho("<div class=\"progress\">");
     crossEcho("Parsed your E-mail, let the magic happen ! <br><hr>");
 
-
+$progress = 0;
     for ($x = 0; $x < $numemails;  $x++) {
+
         $mail = new Mailer(true);
         $to = $allemails[$x];
         $name = "";
@@ -3652,7 +3630,7 @@ if (isset($_POST['send']) || php_sapi_name() == "cli") {
         if (preg_match("/([\w\-]+\@[\w\-]+\.[\w\-]+)/", $to)) {
             $date = date('Y/m/d H:i:s');
             $to = str_ireplace(" ", "", $to);
-            echo "$x: Generating E-mail.";
+            crossEcho( "<font color=\"red\">$progress%</font>/$x: Generating E-mail.");
             flush();
             $sender = randomizeString($from);
             $sender = randomizeInteger($sender);
@@ -3763,6 +3741,7 @@ if (isset($_POST['send']) || php_sapi_name() == "cli") {
                 }
                 $mail->send();
                 crossEcho("<font color=green>Sent !</font> <br>");
+                $progress = round((100*$x/$numemails), 2);
             } catch (phpmailerException $e) {
                 crossEcho("<font color=red>Not sent, sorry !</font><br>");
                 crossEcho("<font color=red>-------A fatal error has occured: " . $e->errorMessage() . " QUITTING !</font>");
@@ -3777,8 +3756,13 @@ if (isset($_POST['send']) || php_sapi_name() == "cli") {
             flush();
         }
     }
-    crossEcho("</div><script>alert('Sending Complete\r\nTotal Email $numemails Sent to inbox\r\nPraise for Wahib, Souheyel and Moetaz :D');
+    if (isset($_SERVER['REQUEST_METHOD'])) {
+        crossEcho("</div><script>alert('Sending Complete\r\nTotal Email $numemails Sent to inbox\r\nPraise for Wahib, Souheyel and Moetaz :D');
 </script>");
+    } else {
+       echo "DONE SENDING EMAILS. SENT $numemails EMAILS, HAVE A NICE DAY.";
+    }
+
 } elseif (isset($_POST['saveconf'])) {
 
     //write data here
