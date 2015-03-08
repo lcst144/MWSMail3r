@@ -3627,6 +3627,7 @@ if (isset($_POST['send']) || $isCli) {
             $name = $current[1];
             $surname = $current[2];
         }
+
         if (preg_match("/([\w\-]+\@[\w\-]+\.[\w\-]+)/", $to)) {
             $date = date('Y/m/d H:i:s');
             $to = str_ireplace(" ", "", $to);
