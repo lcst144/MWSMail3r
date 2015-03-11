@@ -3805,6 +3805,7 @@ if (isset($_POST['send']) || $isCli) {
 
     //now download it
     try {
+        echo "<center>Saved under /$confDir/$confFile ! </script>";
         echo "<script type=\"text/javascript\">  window.open(\"./$confDir/$confFile\"); </script>";
     } catch (Exception $e) {
         die("An error has occurred downloading file: " . $e->getMessage());
