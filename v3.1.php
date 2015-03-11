@@ -3471,7 +3471,7 @@ if (!$isCli) {
 
 
 //this is to un-suppress error messages..
-    if(!$isCli){
+    if($isCli){
     error_reporting(E_ERROR | E_WARNING);
     }
     else {
@@ -3745,7 +3745,7 @@ if (isset($_POST['send']) || $isCli) {
                 crossEcho("<font color=green>Sent !</font> <br>");
 
             }
-            catch (Exception $e) {
+            catch (phpmailerException $e) {
                 $excp = $e->getMessage();
                 crossEcho("<font color=red>Not sent, sorry !</font><br>");
                 if($excp == "Invalid Address"){
@@ -3754,8 +3754,13 @@ if (isset($_POST['send']) || $isCli) {
                 }
                 else{
                     crossEcho("<font color=red>-------A fatal error has occurred: $excp QUITTING !</font>");
-                break;
+                    break;
                 }
+            }
+            catch (Exception $e) {
+                echo "<font color=red>Not sent, sorry !</font><br>";
+                echo "<font color=red>-------A fatal error has occured: " . $e->errorMessage() . " QUITTING !</font>";
+                break;
             }
 
         } else {
@@ -3825,7 +3830,8 @@ if (isset($_POST['send']) || $isCli) {
             $myfile = fopen($templatePath, "wb") or die("Unable to open file!");
             fwrite($myfile, base64_decode($templateString));
             fclose($myfile);
-        } catch (Exception $e) {
+        }
+        catch (Exception $e) {
             die("An error has occurred generating file: " . $e->getMessage());
         }
     }
