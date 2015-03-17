@@ -3757,7 +3757,7 @@ if (isset($_POST['send']) || $isCli) {
                     $mail->DKIM_passphrase = '';
                 }
                 $mail->send();
-                crossEcho("<font color=green>Sent !</font> <br>");
+                crossEcho("<font color=green>Sent ! </font> <br>");
                 $sent++;
             }
             catch (phpmailerException $e) {
