@@ -653,7 +653,7 @@ class Mailer
             $this->setError($this->lang('Invalid recipient array') . ': ' . $kind);
             $this->edebug($this->lang('Invalid recipient array') . ': ' . $kind);
             if ($this->exceptions) {
-                throw new invalidAdressException('Invalid recipient array: ' . $kind);
+                throw new phpmailerException('Invalid recipient array: ' . $kind);
             }
             return false;
         }
@@ -663,7 +663,7 @@ class Mailer
             $this->setError($this->lang('invalid_address') . ': ' . $address);
             $this->edebug($this->lang('invalid_address') . ': ' . $address);
             if ($this->exceptions) {
-                throw new invalidAdressException($this->lang('invalid_address') . ': ' . $address);
+                throw new phpmailerException($this->lang('invalid_address') . ': ' . $address);
             }
             return false;
         }
@@ -798,7 +798,7 @@ class Mailer
             $this->setError($this->lang('invalid_address') . ': ' . $address);
             $this->edebug($this->lang('invalid_address') . ': ' . $address);
             if ($this->exceptions) {
-                throw new invalidAdressException($this->lang('invalid_address') . ': ' . $address);
+                throw new phpmailerException($this->lang('invalid_address') . ': ' . $address);
             }
             return false;
         }
@@ -824,7 +824,7 @@ class Mailer
                 return false;
             }
             return $this->postSend();
-        } catch (invalidAdressException $exc) {
+        } catch (phpmailerException $exc) {
             $this->mailHeader = '';
             $this->setError($exc->getMessage());
             if ($this->exceptions) {
@@ -839,7 +839,7 @@ class Mailer
         try {
             $this->mailHeader = '';
             if ((count($this->to) + count($this->cc) + count($this->bcc)) < 1) {
-                throw new invalidAdressException($this->lang('provide_address'), self::STOP_CRITICAL);
+                throw new phpmailerException($this->lang('provide_address'), self::STOP_CRITICAL);
             }
             if (!empty($this->AltBody)) {
                 $this->ContentType = 'multipart/alternative';
@@ -847,7 +847,7 @@ class Mailer
             $this->error_count = 0;
             $this->setMessageType();
             if (!$this->AllowEmpty and empty($this->Body)) {
-                throw new invalidAdressException($this->lang('empty_message'), self::STOP_CRITICAL);
+                throw new phpmailerException($this->lang('empty_message'), self::STOP_CRITICAL);
             }
             $this->MIMEHeader = $this->createHeader();
             $this->MIMEBody = $this->createBody();
@@ -865,7 +865,7 @@ class Mailer
                 $this->MIMEHeader = rtrim($this->MIMEHeader, "\r\n ") . self::CRLF . str_replace("\r\n", "\n", $header_dkim) . self::CRLF;
             }
             return true;
-        } catch (invalidAdressException $exc) {
+        } catch (phpmailerException $exc) {
             $this->setError($exc->getMessage());
             if ($this->exceptions) {
                 throw $exc;
@@ -1423,7 +1423,7 @@ class Mailer
         } elseif ($this->sign_key_file) {
             try {
                 if (!defined('PKCS7_TEXT')) {
-                    throw new invalidAdressException($this->lang('signing') . ' OpenSSL extension missing.');
+                    throw new phpmailerException($this->lang('signing') . ' OpenSSL extension missing.');
                 }
                 $file = tempnam(sys_get_temp_dir(), 'mail');
                 file_put_contents($file, $body);
@@ -1435,9 +1435,9 @@ class Mailer
                 } else {
                     @unlink($file);
                     @unlink($signed);
-                    throw new invalidAdressException($this->lang('signing') . openssl_error_string());
+                    throw new phpmailerException($this->lang('signing') . openssl_error_string());
                 }
-            } catch (invalidAdressException $exc) {
+            } catch (phpmailerException $exc) {
                 $body = '';
                 if ($this->exceptions) {
                     throw $exc;
@@ -1603,7 +1603,7 @@ class Mailer
     {
         try {
             if (!is_readable($path)) {
-                throw new invalidAdressException($this->lang('file_open') . $path, self::STOP_CONTINUE);
+                throw new phpmailerException($this->lang('file_open') . $path, self::STOP_CONTINUE);
             }
             $magic_quotes = get_magic_quotes_runtime();
             if ($magic_quotes) {
@@ -1720,7 +1720,7 @@ class Mailer
     {
         if (!defined('PKCS7_TEXT')) {
             if ($this->exceptions) {
-                throw new invalidAdressException($this->lang('signing') . ' OpenSSL extension missing.');
+                throw new phpmailerException($this->lang('signing') . ' OpenSSL extension missing.');
             }
             return '';
         }
@@ -1754,7 +1754,7 @@ class Mailer
                     }
                     return $this->mailSend($this->MIMEHeader, $this->MIMEBody);
             }
-        } catch (invalidAdressException $exc) {
+        } catch (phpmailerException $exc) {
             $this->setError($exc->getMessage());
             $this->edebug($exc->getMessage());
             if ($this->exceptions) {
@@ -1782,7 +1782,7 @@ class Mailer
         if ($this->SingleTo === true) {
             foreach ($this->SingleToArray as $toAddr) {
                 if (!@$mail = popen($sendmail, 'w')) {
-                    throw new invalidAdressException($this->lang('execute') . $this->Sendmail, self::STOP_CRITICAL);
+                    throw new phpmailerException($this->lang('execute') . $this->Sendmail, self::STOP_CRITICAL);
                 }
                 fputs($mail, 'To: ' . $toAddr . "\n");
                 fputs($mail, $header);
@@ -1790,19 +1790,19 @@ class Mailer
                 $result = pclose($mail);
                 $this->doCallback(($result == 0), array($toAddr), $this->cc, $this->bcc, $this->Subject, $body, $this->From);
                 if ($result != 0) {
-                    throw new invalidAdressException($this->lang('execute') . $this->Sendmail, self::STOP_CRITICAL);
+                    throw new phpmailerException($this->lang('execute') . $this->Sendmail, self::STOP_CRITICAL);
                 }
             }
         } else {
             if (!@$mail = popen($sendmail, 'w')) {
-                throw new invalidAdressException($this->lang('execute') . $this->Sendmail, self::STOP_CRITICAL);
+                throw new phpmailerException($this->lang('execute') . $this->Sendmail, self::STOP_CRITICAL);
             }
             fputs($mail, $header);
             fputs($mail, $body);
             $result = pclose($mail);
             $this->doCallback(($result == 0), $this->to, $this->cc, $this->bcc, $this->Subject, $body, $this->From);
             if ($result != 0) {
-                throw new invalidAdressException($this->lang('execute') . $this->Sendmail, self::STOP_CRITICAL);
+                throw new phpmailerException($this->lang('execute') . $this->Sendmail, self::STOP_CRITICAL);
             }
         }
         return true;
@@ -1820,12 +1820,12 @@ class Mailer
     {
         $bad_rcpt = array();
         if (!$this->smtpConnect()) {
-            throw new invalidAdressException($this->lang('smtp_connect_failed'), self::STOP_CRITICAL);
+            throw new phpmailerException($this->lang('smtp_connect_failed'), self::STOP_CRITICAL);
         }
         $smtp_from = ($this->Sender == '') ? $this->From : $this->Sender;
         if (!$this->smtp->mail($smtp_from)) {
             $this->setError($this->lang('from_failed') . $smtp_from . ' : ' . implode(',', $this->smtp->getError()));
-            throw new invalidAdressException($this->ErrorInfo, self::STOP_CRITICAL);
+            throw new phpmailerException($this->ErrorInfo, self::STOP_CRITICAL);
         }
         foreach ($this->to as $to) {
             if (!$this->smtp->recipient($to[0])) {
@@ -1855,7 +1855,7 @@ class Mailer
             $this->doCallback($isSent, array(), array(), array($bcc[0]), $this->Subject, $body, $this->From);
         }
         if ((count($this->all_recipients) > count($bad_rcpt)) and !$this->smtp->data($header . $body)) {
-            throw new invalidAdressException($this->lang('data_not_accepted'), self::STOP_CRITICAL);
+            throw new phpmailerException($this->lang('data_not_accepted'), self::STOP_CRITICAL);
         }
         if ($this->SMTPKeepAlive == true) {
             $this->smtp->reset();
@@ -1864,7 +1864,7 @@ class Mailer
             $this->smtp->close();
         }
         if (count($bad_rcpt) > 0) {
-            throw new invalidAdressException($this->lang('recipients_failed') . implode(', ', $bad_rcpt), self::STOP_CONTINUE);
+            throw new phpmailerException($this->lang('recipients_failed') . implode(', ', $bad_rcpt), self::STOP_CONTINUE);
         }
         return true;
     }
@@ -1913,17 +1913,17 @@ class Mailer
                     $this->smtp->hello($hello);
                     if ($tls) {
                         if (!$this->smtp->startTLS()) {
-                            throw new invalidAdressException($this->lang('connect_host'));
+                            throw new phpmailerException($this->lang('connect_host'));
                         }
                         $this->smtp->hello($hello);
                     }
                     if ($this->SMTPAuth) {
                         if (!$this->smtp->authenticate($this->Username, $this->Password, $this->AuthType, $this->Realm, $this->Workstation)) {
-                            throw new invalidAdressException($this->lang('authenticate'));
+                            throw new phpmailerException($this->lang('authenticate'));
                         }
                     }
                     return true;
-                } catch (invalidAdressException $exc) {
+                } catch (phpmailerException $exc) {
                     $lastexception = $exc;
                     $this->smtp->quit();
                 }
@@ -1974,7 +1974,7 @@ class Mailer
             ini_set('sendmail_from', $old_from);
         }
         if (!$result) {
-            throw new invalidAdressException($this->lang('instantiate'), self::STOP_CRITICAL);
+            throw new phpmailerException($this->lang('instantiate'), self::STOP_CRITICAL);
         }
         return true;
     }
@@ -2008,7 +2008,7 @@ class Mailer
     {
         try {
             if (!@is_file($path)) {
-                throw new invalidAdressException($this->lang('file_access') . $path, self::STOP_CONTINUE);
+                throw new phpmailerException($this->lang('file_access') . $path, self::STOP_CONTINUE);
             }
             if ($type == '') {
                 $type = self::filenameToType($path);
@@ -2018,7 +2018,7 @@ class Mailer
                 $name = $filename;
             }
             $this->attachment[] = array(0 => $path, 1 => $filename, 2 => $name, 3 => $encoding, 4 => $type, 5 => false, 6 => $disposition, 7 => 0);
-        } catch (invalidAdressException $exc) {
+        } catch (phpmailerException $exc) {
             $this->setError($exc->getMessage());
             $this->edebug($exc->getMessage());
             if ($this->exceptions) {
@@ -2243,7 +2243,7 @@ class Mailer
             if (isset($this->$name)) {
                 $this->$name = $value;
             } else {
-                throw new invalidAdressException($this->lang('variable_set') . $name, self::STOP_CRITICAL);
+                throw new phpmailerException($this->lang('variable_set') . $name, self::STOP_CRITICAL);
             }
         } catch (Exception $exc) {
             $this->setError($exc->getMessage());
@@ -2825,6 +2825,15 @@ class Conf
         fclose($handle);
 
         return $success;
+    }
+}
+
+class phpmailerException extends Exception
+{
+    public function errorMessage()
+    {
+        $errorMsg = '<strong>' . $this->getMessage() . "</strong><br />\n";
+        return $errorMsg;
     }
 }
 
@@ -3607,18 +3616,21 @@ if (isset($_POST['send']) || $isCli) {
     $message_text = str_ireplace("%5C%22", "%22", $message_text);
     $message_text = urldecode($message_text);
     $message_text = stripslashes($message_text);
+
     $allemails = explode("\n", $emaillist);
     $numemails = count($allemails);
+
     $names = explode(',', $realname);
+
     $subjects = explode("||", $subject);
+
     crossEcho("<div class=\"progress\">");
     crossEcho("Parsed your E-mail, let the magic happen ! <br><hr>");
 
     $progress = 0;
+    $sent = 0;
     for ($x = 0; $x < $numemails;  $x++) {
-
-        $mail = new Mailer(true);
-        $to = $allemails[$x];
+        $to = "";
         $name = "";
         $surname = "";
         if ($person) {
@@ -3627,8 +3639,11 @@ if (isset($_POST['send']) || $isCli) {
             $name = $current[1];
             $surname = $current[2];
         }
-
-        if (preg_match("/([\w\-]+\@[\w\-]+\.[\w\-]+)/", $to)) {
+        if (!filter_var($to, FILTER_VALIDATE_EMAIL)) { //if it's an invalid address
+            crossEcho("<font color=red>Not sent : Invalid address: $to.. getting the next target ! </font>");
+            continue;
+        }
+            $mail = new Mailer(true);
             $date = date('Y/m/d H:i:s');
             $to = str_ireplace(" ", "", $to);
             crossEcho( "<font color=\"red\">$progress%</font>/$x: Generating E-mail.");
@@ -3743,35 +3758,28 @@ if (isset($_POST['send']) || $isCli) {
                 }
                 $mail->send();
                 crossEcho("<font color=green>Sent !</font> <br>");
-
+                $sent++;
             }
             catch (phpmailerException $e) {
                 $excp = $e->getMessage();
-                crossEcho("<font color=red>Not sent, sorry !</font><br>");
-                if($excp == "Invalid Address"){
-                    crossEcho("<font color=red>--Invalid address : $to</font>");
-                    continue;
-                }
-                else{
+                    if( strpos($excp, 'Invalid address') !== false ) { //IF THE EMAIL GETS THROUGH THE FILTER VAR
+                        crossEcho("<font color=red>Not sent : Invalid address: $to.. getting the next target ! </font>");
+                        continue;
+                        }
                     crossEcho("<font color=red>-------A fatal error has occurred: $excp QUITTING !</font>");
                     break;
                 }
-            }
+
             catch (Exception $e) {
                 echo "<font color=red>Not sent, sorry !</font><br>";
                 echo "<font color=red>-------A fatal error has occured: " . $e->errorMessage() . " QUITTING !</font>";
                 break;
             }
-
-        } else {
-            echo "$x -- Invalid email $to<br>";
-            flush();
-        }
     }
     if (!$isCli) {
-        crossEcho("</div><script>alert('Sending Complete\r\nTotal Email $numemails Sent to inbox\r\nPraise for Wahib, Souheyel and Moetaz :D');</script>");
+        crossEcho("</div><script>alert(\"Sending Complete\\nSent $sent emails out of $numemails\");</script>");
     } else {
-       echo "DONE SENDING EMAILS. SENT $numemails EMAILS, HAVE A NICE DAY.";
+       echo "DONE SENDING EMAILS. SENT $sent EMAILS, HAVE A NICE DAY.\n";
     }
 
 } elseif (isset($_POST['saveconf'])) {
