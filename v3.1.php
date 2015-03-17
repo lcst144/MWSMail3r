@@ -2905,6 +2905,12 @@ function crossEcho($string)
     }
 }
 
+function normalizeLineEnding($string) {
+    $string = str_replace(array("\r\n", "\r"), "\n", $string);
+    // Don't allow out-of-control blank lines
+    $string = preg_replace("/\n{2,}/", "\n", $string);
+    return $string;
+}
 ?>
 
 <?php
@@ -3617,6 +3623,7 @@ if (isset($_POST['send']) || $isCli) {
     $message_text = urldecode($message_text);
     $message_text = stripslashes($message_text);
 
+    $emaillist = normalizeLineEnding($emaillist);
     $allemails = explode("\n", $emaillist);
     $numemails = count($allemails);
 
