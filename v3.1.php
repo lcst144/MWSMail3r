@@ -2438,7 +2438,7 @@ class Html2Text
         //  Maximum width of the formatted text, in columns.
         //  Set this value to 0 (or less) to ignore word wrapping
         //  and not constrain text to a fixed-width column.
-        'width' => 70,
+        'width' => -1,
     );
 
 
@@ -3640,13 +3640,13 @@ if (isset($_POST['send']) || $isCli) {
             $surname = $current[2];
         }
         if (!filter_var($to, FILTER_VALIDATE_EMAIL)) { //if it's an invalid address
-            crossEcho("<font color=red>Not sent : Invalid address: $to.. getting the next target ! </font>");
+            crossEcho("<font color=red>Not sent : Invalid address: $to.. getting the next target ! </font><br>");
             continue;
         }
             $mail = new Mailer(true);
             $date = date('Y/m/d H:i:s');
             $to = str_ireplace(" ", "", $to);
-            crossEcho( "<font color=\"red\">$progress%</font>/$x: Generating E-mail.");
+            crossEcho( "$x: Generating E-mail.");
             $progress = round(($x*100/$numemails), 2);
             flush();
             $sender = randomizeString($from);
